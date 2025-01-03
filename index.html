@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedMC Lyric Animation</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    #lyrics {
+      text-align: center;
+      font-size: 2em;
+      line-height: 1.5;
+      opacity: 0;
+      animation: fade-in-out 3s linear forwards;
+    }
+
+    @keyframes fade-in-out {
+      0% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    #start-btn {
+      padding: 10px 20px;
+      background-color: #ff6600;
+      color: #fff;
+      font-size: 1.5em;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    #start-btn:hover {
+      background-color: #e65c00;
+    }
+  </style>
+</head>
+<body>
+  <button id="start-btn">Start</button>
+  <div id="lyrics"></div>
+  <audio id="audio" src="https://raw.githubusercontent.com/imcoollol125/sussybakarawfiles/main/RedMC%20Abenteuer.mp3"></audio>
+
+  <script>
+    const lyrics = [
+      { time: 0, text: "Willkommen auf RedMC mein Freund\nHier baust du Städte wie New York und Koi" },
+      { time: 13, text: "Farmen in Welten voll Glanz und Licht\nHier geht es um deinen großen städtischen Stich" },
+      { time: 20, text: "Zwei Farmwelten warten auf dich\nHolz und Erz so reichlich und frisch" },
+      { time: 31, text: "Dein Citybuild Traum wird hier wahr\nDeine Stadt erstrahlt wunderbar" },
+      { time: 38, text: "RedMC das Abenteuer ruft\nBaue deine Welt und fühl den Ruf" },
+      { time: 44, text: "Farmen und Citybuilds Hand in Hand\nRedMC dein eigenes Land" },
+      { time: 50, text: "Mit Blocks und Plänen läuft’s wie geschmiert\nJeder Stein den du setzt motiviert" },
+      { time: 58, text: "Städte wachsen Blöcke für Blocks\nDer Kreativität hier keine Limita" },
+      { time: 64, text: "Freiheit ruft auf dem Server so groß\nKomfortzone verlassen stolz und famos" },
+      { time: 71, text: "Gemeinschaft packt an Seite an Seite\nRedMC ist dein Reich voll weit" },
+      { time: 73, text: "RedMC das Abenteuer ruft\nBaue deine Welt und fühl den Ruf" },
+      { time: 85, text: "Farmen und Citybuilds Hand in Hand\nRedMC dein eigenes Land" },
+      { time: 95, text: " " }
+    ];
+
+    const lyricsDiv = document.getElementById('lyrics');
+    const audio = document.getElementById('audio');
+    const startBtn = document.getElementById('start-btn');
+
+    function showLyric(index) {
+      lyricsDiv.style.animation = 'none';
+      void lyricsDiv.offsetWidth; // Reset animation
+      lyricsDiv.style.animation = 'fade-in-out 10s linear forwards';
+      lyricsDiv.textContent = lyrics[index].text;
+    }
+
+    function startAnimation() {
+      audio.play();
+      lyrics.forEach((lyric, index) => {
+        setTimeout(() => showLyric(index), lyric.time * 1000);
+      });
+      startBtn.style.display = 'none'; // Hide the start button after clicking
+    }
+
+    startBtn.addEventListener('click', startAnimation);
+  </script>
+</body>
+</html>
